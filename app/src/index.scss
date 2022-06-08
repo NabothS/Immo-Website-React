@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap");
+
+body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+$font-family-sans-serif: "Source Sans Pro", sans-serif;
+$primary: #1232a0;
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";
+
+table .btn + .btn {
+    margin-left: 0.5rem;
+}
+
+.container{
+    padding: 50px;
+}
+.btn-tertiary{
+    margin-top: 20px;
+}
+
+select{
+    width: 100%;
+    padding:7px;
+    background-color: white;
+    border: 0.1px solid rgba(117, 117, 117, 0.301);
+    border-radius: 5px;
+}
