@@ -33,6 +33,7 @@ const Header = () => {
     ];
 
     if(user){
+        console.log(user);
         if(user.role == "REALTOR"){
             items = [
                 {
