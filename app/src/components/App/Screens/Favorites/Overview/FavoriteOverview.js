@@ -28,6 +28,16 @@ const FavoritesOverviewScreen = () => {
 
   useTitle(t("Favorites"));
 
+  let newFavs = [];
+
+  if(user){
+    favorites.forEach(item => {
+        if(item.user.id === user.id ){
+            newFavs.push(item);
+        }
+    });
+  }
+
   const handleFavoriteDelete = () => {
     invalidate();
   };
@@ -53,7 +63,7 @@ const FavoritesOverviewScreen = () => {
           </TableHeader>
         }
       >
-        {favorites.map((favorite) => (
+        {newFavs.map((favorite) => (
           <TableRow key={favorite.id}>
             <td>
                 {!isVoid(favorite.building.avatar) && (

@@ -9,6 +9,7 @@ import PasswordInput from "../../../../Design/Form/PasswordInput";
 import OfficeSelect from "../../Offices/Select/OfficeSelect";
 import { useUser } from "../../../Auth/AuthProvider";
 import useFetch from "../../../../../core/hooks/useFetch";
+import { UserRoles } from "../../../../../core/modules/users/constants";
 
 // dynamic schema
 
@@ -83,9 +84,9 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
             value={values.role}
             error={errors.officeId}
           >
-            <option value="USER">User</option>
-            <option value="REALTOR">Makelaar</option>
-            <option value="ADMIN">Admin</option>
+            <option value={UserRoles.User} >User</option>
+            <option value={UserRoles.Realtor}>Makelaar</option>
+            <option value={UserRoles.Admin}>Admin</option>
           </select>
         </FormGroup>
       ;
