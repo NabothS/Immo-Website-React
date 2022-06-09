@@ -32,6 +32,33 @@ const Header = () => {
         },
     ];
 
+    if(user){
+        if(user.role == "REALTOR"){
+            items = [
+                {
+                    href: BuildingRoutes.Index,
+                    isActive: location.pathname.includes(BuildingRoutes.Index),
+                    label: t("Buildings"),
+                },
+                {
+                    href: LogRoutes.Index,
+                    isActive: location.pathname.includes(LogRoutes.Index),
+                    label: t("Messages"),
+                },
+                {
+                    href: OfficeRoutes.Index,
+                    isActive: location.pathname.includes(OfficeRoutes.Index),
+                    label: t("My Real Estate Office"),
+                },
+                {
+                    href: UserRoutes.Index,
+                    isActive: location.pathname.includes(UserRoutes.Index),
+                    label: t("Users"),
+                },
+            ];
+        }
+    }
+
     // admin only routes
     if (isAdmin(user)) {
         items = [

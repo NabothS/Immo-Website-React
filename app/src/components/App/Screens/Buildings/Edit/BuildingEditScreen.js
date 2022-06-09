@@ -22,6 +22,7 @@ const BuildingEditScreen = () => {
         mutate(`${process.env.REACT_APP_API_URL}/buildings`, {
             method: "POST",
             data,
+            multipart: true,
             onSuccess: () => {
                 onBuildingUpdate();
                 navigate(route(BuildingRoutes.Detail, { id: building.id }));

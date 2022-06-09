@@ -17,6 +17,14 @@ export default class BuildingService {
         return buildings;
     };
 
+    findByOfficeId = async(id:number) => {
+        const building = await this.repository.find({
+            where: { office: {id} },
+            relations: ["office", "logs","category", "logs.user", "logs.building"],
+        });
+        return building;
+    }
+
     findOne = async (id: number) => {
         const building = await this.repository.findOne({
             where: { id },

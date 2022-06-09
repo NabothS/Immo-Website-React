@@ -18,15 +18,19 @@ import Title from "../../../../Design/Typography/Title";
 import useTitle from "../../../../../core/hooks/useTitle";
 import isVoid from "../../../../../core/helpers/isVoid";
 import { getImagePath } from "../../../../../core/helpers/api";
+import { useUser } from "../../../Auth/AuthProvider";
 
 const BuildingsOverviewScreen = () => {
     const { t } = useTranslation();
+
     const {
         isLoading,
         data: buildings,
         error,
         invalidate,
     } = useFetch("/buildings");
+
+    console.log(buildings)
 
     useTitle(t("Buildings"));
 
@@ -73,12 +77,7 @@ const BuildingsOverviewScreen = () => {
                         </td>
 
                         <td>
-                            <Link
-                                to={route(OfficeRoutes.Detail, {
-                                    id: building.office.id,
-                                })}>
                                 {building.office.name}
-                            </Link>
                         </td>
                         <td>
                             <DeleteButton

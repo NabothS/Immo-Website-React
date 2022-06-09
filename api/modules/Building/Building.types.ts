@@ -7,6 +7,7 @@ export interface BuildingBody {
     buy_rent: string;
     year: string;
     street: string;
+    number: string;
     city: string;
     price: string;
     avatar?: string | null;

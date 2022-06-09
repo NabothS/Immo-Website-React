@@ -20,7 +20,7 @@ export default class Building extends BaseEntity {
     @IsDefined()
     @Column()
     size: string;
-    
+
     @Column()
     buy_rent: string;
 
@@ -29,6 +29,9 @@ export default class Building extends BaseEntity {
 
     @Column()
     street: string;
+
+    @Column({ nullable: true })
+    number: string;
 
     @Column()
     city: string;

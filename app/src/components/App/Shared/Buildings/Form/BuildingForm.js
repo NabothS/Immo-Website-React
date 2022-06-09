@@ -57,13 +57,21 @@ const BuildingForm = ({ initialData = {}, disabled, onSubmit, label }) => {
             values.officeId = user.office.id;
             form ='';
         }
+
+        if(user.office != null){
+            values.officeId = user.office.id;
+            form = '';
+        }
     }
+
+
 
     const handleData = (values) => {
         console.log(values);
         onSubmit(values);
     };
 
+    console.log(values);
 
     return (
         <form onSubmit={handleSubmit(handleData)} noValidate={true}>
@@ -90,14 +98,14 @@ const BuildingForm = ({ initialData = {}, disabled, onSubmit, label }) => {
                 <Label htmlFor="size">{t("Size in m³")}</Label>
                 <Input
                     name="size"
-                    value={values.name}
+                    value={values.size}
                     onChange={handleChange}
-                    error={errors.name}
+                    error={errors.size}
                 />
             </FormGroup>
             <FormGroup>
                 <Label htmlFor="buy_rent">{t("For Rent / Sale")}</Label>
-                <select name="rent_buy">
+                <select onChange={handleChange} name="buy_rent" value={values.buy_rent}>
                     <option value="rent">{t('For Rent')}</option>
                     <option value="sale">{t('For Sale')}</option>
                 </select>

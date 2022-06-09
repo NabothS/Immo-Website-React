@@ -154,6 +154,33 @@ const App = () => {
                             </Route>
                         </Route>
                     </Route>
+                    {/* Realtor */}
+                    <Route
+                        element={
+                            <RoleContainer roles={[UserRoles.Realtor]}>
+                                <Outlet />
+                            </RoleContainer>
+                        }>
+                        {/* Users */}
+                        <Route
+                            path={UserRoutes.Index}
+                            element={<UsersLayout />}>
+                            <Route index element={<UsersOverviewScreen />} />
+                            <Route
+                                path={UserRoutes.New}
+                                element={<UserAddScreen />}
+                            />
+                            <Route
+                                path={UserRoutes.Detail}
+                                element={<UserDetailLayout />}>
+                                <Route index element={<UserDetailScreen />} />
+                                <Route
+                                    path={UserRoutes.Edit}
+                                    element={<UserEditScreen />}
+                                />
+                            </Route>
+                        </Route>
+                    </Route>
                     <Route
                         path="*"
                         element={<Navigate to={BuildingRoutes.Index} />}

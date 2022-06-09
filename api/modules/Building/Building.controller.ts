@@ -6,6 +6,8 @@ import { AuthRequest } from "../../middleware/auth/auth.types";
 import CategoryService from "../Category/Category.service";
 import OfficeService from "../Office/Office.service";
 import { OfficeBody } from "../Office/Office.types";
+import { UserRole } from "../User/User.constants";
+import UserService from "../User/User.service";
 import Building from "./Building.entity";
 import BuildingService from "./Building.service";
 import { BuildingBody } from "./Building.types";
@@ -27,17 +29,33 @@ export default class BuildingController {
     private buildingService: BuildingService;
     private officeService: OfficeService;
     private categoryService: CategoryService;
+    private userService: UserService;
+
 
     constructor() {
         this.buildingService = new BuildingService();
         this.officeService = new OfficeService();
         this.categoryService = new CategoryService();
+        this.userService = new UserService();
+
     }
 
     all = async (req: AuthRequest, res: Response, next: NextFunction) => {
         // don't show password
-        const buildings = await this.buildingService.all();
-        return res.json(buildings);
+        const user = await this.userService.findOne(req.user.id);
+        let buildings:Object;
+        console.log(user);
+        if(user.isAdmin()){
+            buildings = await this.buildingService.all();
+        }
+        else if(user.office === null){
+            buildings = []
+        }
+        else{
+            buildings = await this.buildingService.findByOfficeId( user.office.id );
+        }
+
+        return res.json(buildings); 
     };
 
     find = async (
