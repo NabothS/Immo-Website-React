@@ -44,6 +44,13 @@ const RealtorRoutes = {
   Edit: "/realtor/:id/edit",
 };
 
+const FavoriteRoutes = {
+    Index: "/favorites",
+    New: "/favorites/new",
+    Detail: "/favorites/:id",
+    Edit: "/favorites/:id/edit",
+  };
+
 // replaces : values with values from object
 // e.g. route('/projects/:id', { id : 9 }) -> /projects/9
 export const route = (path, options = {}) => {
@@ -61,4 +68,5 @@ export {
   BuildingRoutes,
   CategoryRoutes,
   RealtorRoutes,
+  FavoriteRoutes,
 };

@@ -10,6 +10,7 @@ import * as path from "path";
 import OfficeController from "../modules/Office/Office.controller";
 import BuildingController from "../modules/Building/Building.controller";
 import CategoryController from "../modules/Category/Category.controller";
+import FavoriteController from "../modules/Favorite/Favorite.controller";
 
 // catch error since Express doesn't catch errors in async functions
 // this will catch the controller method + will send the error through next() method
@@ -50,6 +51,13 @@ const registerAuthenticatedRoutes = (router: Router) => {
     authRouter.post("/users", useMethod(userController.create));
     authRouter.patch("/users/:id", useMethod(userController.update));
     authRouter.delete("/users/:id", useMethod(userController.delete));
+
+    const favoriteController = new FavoriteController();
+    authRouter.get("/favorites", useMethod(favoriteController.all));
+    authRouter.get("/favorites/:id", useMethod(favoriteController.find));
+    authRouter.post("/favorites", useMethod(favoriteController.create));
+    authRouter.patch("/favorites/:id", useMethod(favoriteController.update));
+    authRouter.delete("/favorites/:id", useMethod(favoriteController.delete));
 
     const officeController = new OfficeController();
     authRouter.get("/offices", useMethod(officeController.all));

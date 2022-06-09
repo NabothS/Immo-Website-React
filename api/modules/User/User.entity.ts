@@ -13,6 +13,7 @@ import { BaseEntity } from "../BaseEntity";
 import { IsDefined, IsEmail } from "class-validator";
 import Log from "../Log/Log.entity";
 import Office from "../Office/Office.entity";
+import Favorite from "../Favorite/Favorite.entity";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -45,6 +46,10 @@ export default class User extends BaseEntity {
 
     @OneToMany(() => Log, (log) => log.user)
     logs: Log[];
+
+    @OneToMany(() => Favorite, (favorite) => favorite.user, {
+    })
+    favorites: Favorite[];
 
     @ManyToOne(() => Office, (office) => office.users)
     office: Office;

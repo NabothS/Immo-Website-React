@@ -11,6 +11,7 @@ import Log from "../Log/Log.entity";
 import LogService from "../Log/Log.service";
 import Office from "../Office/Office.entity";
 import Category from "../Category/Category.entity";
+import Favorite from "../Favorite/Favorite.entity";
 
 @Entity()
 export default class Building extends BaseEntity {
@@ -47,6 +48,10 @@ export default class Building extends BaseEntity {
 
     @ManyToOne(() => Office, (office) => office.buildings)
     office: Office;
+
+    @OneToMany(() => Favorite, (favorite) => favorite.building, {
+    })
+    favorites: Favorite[];
 
     @OneToMany(() => Log, (log) => log.building, {
         cascade: true,

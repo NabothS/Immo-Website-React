@@ -1,6 +1,6 @@
 import useFetch from "../../../../../core/hooks/useFetch";
 import Alert from "../../../../Design/Alert";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   BuildingRoutes,
   OfficeRoutes,
@@ -15,15 +15,19 @@ import DeleteButton from "../../../Shared/Generic/Buttons/DeleteButton";
 import Button from "../../../../Design/Buttons/Button";
 import PageHeader from "../../../../Design/PageHeader";
 import Title from "../../../../Design/Typography/Title";
-import { AiOutlineStar } from 'react-icons/fa';
+import { FaHeart } from "react-icons/fa";
 import useTitle from "../../../../../core/hooks/useTitle";
 import isVoid from "../../../../../core/helpers/isVoid";
 import { getImagePath } from "../../../../../core/helpers/api";
 import { useUser } from "../../../Auth/AuthProvider";
 import Capitalize from "../../../../../core/helpers/capitalize";
+import useMutation from "../../../../../core/hooks/useMutation";
 
 const BuildingsOverviewScreen = () => {
   const { t } = useTranslation();
+
+  const { mutate } = useMutation();
+  const navigate = useNavigate();
 
   const {
     isLoading,
@@ -40,6 +44,23 @@ const BuildingsOverviewScreen = () => {
     invalidate();
   };
 
+  const handleFavorite = (userId, buildingId) => {
+      let data = {
+          "userId" : userId,
+          "buildingId" : buildingId
+      }
+
+      console.log(data);
+
+        mutate(`${process.env.REACT_APP_API_URL}/favorites`, {
+            method: "POST",
+            data,
+            onSuccess: () => {
+            navigate(BuildingRoutes.Index);
+            },
+        })
+  }
+
   if (isLoading) {
     return <LoadingIndicator />;
   }
@@ -51,7 +72,9 @@ const BuildingsOverviewScreen = () => {
     <>
       <PageHeader>
         <Title>{t("All Buildings")}</Title>
-        <Button href={BuildingRoutes.New}>{t("Add new building")}</Button>
+        {user.role !== "USER" && (
+            <Button href={BuildingRoutes.New}>{t("Add new building")}</Button>
+        )}
       </PageHeader>
       <Table
         header={
@@ -72,7 +95,7 @@ const BuildingsOverviewScreen = () => {
         }
       >
         {buildings.map((building) => (
-          <TableRow className="tableBuildings" key={building.id}>
+          <TableRow key={building.id}>
             <td>
               {!isVoid(building.avatar) && (
                 <img
@@ -114,7 +137,9 @@ const BuildingsOverviewScreen = () => {
 
             {user.role === "USER" && (
                 <td>
-                    <AiOutlineStar></AiOutlineStar>
+                    <Button onClick={()=>{handleFavorite(user.id, building.id)}}>
+                        Voeg toe aan <FaHeart />
+                    </Button>
                 </td>
             )}
           </TableRow>

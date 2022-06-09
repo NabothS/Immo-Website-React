@@ -1,6 +1,7 @@
 import {
   BuildingRoutes,
   CategoryRoutes,
+  FavoriteRoutes,
   LogRoutes,
   OfficeRoutes,
   RealtorRoutes,
@@ -34,6 +35,16 @@ const Header = () => {
 
   if (user) {
     console.log(user);
+    if (user.role == "USER") {
+        items = [
+            ...items, 
+            {
+              href: FavoriteRoutes.Index,
+              isActive: location.pathname.includes(FavoriteRoutes.Index),
+              label: t("Favorites"),
+            },
+        ];
+    }
     if (user.role == "REALTOR") {
       items = [
         {
