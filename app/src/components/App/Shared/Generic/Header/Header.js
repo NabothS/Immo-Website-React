@@ -26,15 +26,14 @@ const Header = () => {
       isActive: location.pathname.includes(BuildingRoutes.Index),
       label: t("Buildings"),
     },
-    {
+    /* {
       href: LogRoutes.Index,
       isActive: location.pathname.includes(LogRoutes.Index),
       label: t("Messages"),
-    },
+    }, */
   ];
 
   if (user) {
-    console.log(user);
     if (user.role == "USER") {
         items = [
             ...items, 
@@ -51,11 +50,6 @@ const Header = () => {
           href: BuildingRoutes.Index,
           isActive: location.pathname.includes(BuildingRoutes.Index),
           label: t("Buildings"),
-        },
-        {
-          href: LogRoutes.Index,
-          isActive: location.pathname.includes(LogRoutes.Index),
-          label: t("Messages"),
         },
         {
           href: OfficeRoutes.Index,

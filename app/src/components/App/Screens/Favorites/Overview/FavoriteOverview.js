@@ -1,7 +1,7 @@
 import useFetch from "../../../../../core/hooks/useFetch";
 import Alert from "../../../../Design/Alert";
 import { Link, useNavigate } from "react-router-dom";
-import { FavoriteRoutes, route } from "../../../../../core/routing";
+import { BuildingRoutes, FavoriteRoutes, route } from "../../../../../core/routing";
 import LoadingIndicator from "../../../Shared/Generic/LoadingIndicator/LoadingIndicator";
 import { useTranslation } from "react-i18next";
 import Table from "../../../../Design/Table/Table";
@@ -16,7 +16,7 @@ import isVoid from "../../../../../core/helpers/isVoid";
 import { getImagePath } from "../../../../../core/helpers/api";
 import { useUser } from "../../../Auth/AuthProvider";
 
-const OfficesOverviewScreen = () => {
+const FavoritesOverviewScreen = () => {
   const { t } = useTranslation();
   const navigation = useNavigate();
   const { isLoading, data: favorites, error, invalidate } = useFetch("/favorites");
@@ -42,26 +42,42 @@ const OfficesOverviewScreen = () => {
   return (
     <>
       <PageHeader>
-        <Title>{t("Real Estate Offices")}</Title>
-
-        <Button href={FavoriteRoutes.New}>{t("Create")}</Button>
+        <Title>{t("Your Favorites")}</Title>
       </PageHeader>
       <Table
         header={
           <TableHeader>
-            <th>{t("Test")}</th>
-            <th></th>
+            <th>{t("Image")}</th>
+            <th>{t("Link")}</th>
+            <th>{t("Remove From Favorites")}</th>
           </TableHeader>
         }
       >
         {favorites.map((favorite) => (
           <TableRow key={favorite.id}>
-            <td>favorite.user.name</td>
+            <td>
+                {!isVoid(favorite.building.avatar) && (
+                <img
+                  style={{ width: "6rem", height: "3.5rem" }}
+                  src={getImagePath(favorite.building.avatar)}
+                  alt={favorite.building.name}
+                />
+              )}
+            </td>
+            <td>
+                <Link
+                    to={route(BuildingRoutes.Detail, {
+                    id: favorite.building.id,
+                    })}
+                >
+                    {"Go to the house"}
+                </Link>
+            </td>
             <td>
                 <DeleteButton
                   size="sm"
                   id={favorite.id}
-                  scope="offices"
+                  scope="favorites"
                   onSuccess={handleFavoriteDelete}
                 />
             </td>
@@ -72,4 +88,4 @@ const OfficesOverviewScreen = () => {
   );
 };
 
-export default OfficesOverviewScreen;
+export default FavoritesOverviewScreen;

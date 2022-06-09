@@ -7,6 +7,7 @@ import {
   BuildingRoutes,
   CategoryRoutes,
   RealtorRoutes,
+  FavoriteRoutes,
 } from "../../core/routing";
 import AppLayout from "./AppLayout";
 import AuthProvider from "./Auth/AuthProvider";
@@ -44,6 +45,8 @@ import CategoryAddScreen from "./Screens/Categories/Add/CategoryAddScreen";
 import CategoryDetailLayout from "./Screens/Categories/Detail/CategoryDetailLayout";
 import CategoryDetailScreen from "./Screens/Categories/Detail/CategoryDetailScreen";
 import CategoryEditScreen from "./Screens/Categories/Edit/CategoryEditScreen";
+import FavoritesLayout from "./Screens/Favorites/FavoritesLayout";
+import FavoritesOverviewScreen from "./Screens/Favorites/Overview/FavoriteOverview";
 
 const App = () => {
   return (
@@ -85,11 +88,16 @@ const App = () => {
               />
             </Route>
           </Route>
-          {/* Logs */}
-          <Route path={LogRoutes.Index} element={<LogsLayout />}>
+          
+          <Route path={FavoriteRoutes.Index} element={<FavoritesLayout />}>
+            <Route index element={<FavoritesOverviewScreen />} />
+          </Route>
+
+          {/* Messages */}
+          {/* <Route path={LogRoutes.Index} element={<LogsLayout />}>
             <Route index element={<LogsOverviewScreen />} />
             <Route path={LogRoutes.New} element={<LogAddScreen />} />
-          </Route>
+          </Route> */}
           {/* Admin */}
           <Route
             element={

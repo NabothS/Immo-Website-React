@@ -110,7 +110,13 @@ const BuildingsOverviewScreen = () => {
 
             <td>{Capitalize(building.buy_rent)}</td>
 
-            <td>{building.office.name}</td>
+            {building.office &&(
+                <td>{building.office.name}</td>
+            )}
+            {!building.office &&(
+                <td>{t("Nothing to see here")}</td>
+            )}
+            
 
             <td>{Capitalize(building.street) + ' ' + building.number + ' ' +  building.city}</td>
 

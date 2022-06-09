@@ -44,7 +44,6 @@ export default class BuildingController {
         // don't show password
         const user = await this.userService.findOne(req.user.id);
         let buildings:Object;
-        console.log(user);
         if(user.isAdmin()){
             buildings = await this.buildingService.all();
         }

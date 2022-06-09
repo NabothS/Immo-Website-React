@@ -10,12 +10,12 @@ import { FavoriteBody } from "./Favorite.types";
 export default class FavoriteController {
     private favoriteService: FavoriteService;
     private userService: UserService;
-    private buildingservice: BuildingService;
+    private buildingService: BuildingService;
 
     constructor() {
         this.favoriteService = new FavoriteService();
         this.userService = new UserService();
-        this.buildingservice = new BuildingService();
+        this.buildingService = new BuildingService();
 
     }
 
@@ -51,8 +51,16 @@ export default class FavoriteController {
         }
 
          if (body.buildingId) {
-            body.building = await this.buildingservice.findOne(body.buildingId);
+            body.building = await this.buildingService.findOne(body.buildingId);
         } 
+
+        /* const favorites = await this.favoriteService.all();
+
+        favorites.forEach(item => {
+            if (item.user.id == body.userId && item.building.id == body.buildingId){
+                return res.json('');
+            }
+        }) */
 
         const favorite = await this.favoriteService.create(req.body);
         return res.json(favorite);
