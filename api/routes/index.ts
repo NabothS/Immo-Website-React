@@ -31,10 +31,9 @@ const registerOnboardingRoutes = (router: Router) => {
     router.get("/", (req,res) => res.send("Wowzers"));
     // test route REMOVE after
     const userController = new UserController();
-    if (process.env.ENV === "development") {
         
         router.post("/dev/users", useMethod(userController.create));
-    }
+    
 };
 
 const registerAdminRoutes = (router: Router) => {
