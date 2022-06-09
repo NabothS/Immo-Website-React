@@ -38,6 +38,8 @@ const OfficesOverviewScreen = () => {
         return <Alert color="danger">{error}</Alert>;
     }
 
+    
+
     return (
         <>
             <PageHeader>

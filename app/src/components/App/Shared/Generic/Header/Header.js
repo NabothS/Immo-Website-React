@@ -4,6 +4,7 @@ import {
     CategoryRoutes,
     LogRoutes,
     OfficeRoutes,
+    RealtorRoutes,
     UserRoutes,
 } from "../../../../../core/routing";
 import { useAuthContext, useUser } from "../../../Auth/AuthProvider";
@@ -52,8 +53,8 @@ const Header = () => {
                     label: t("My Real Estate Office"),
                 },
                 {
-                    href: UserRoutes.Index,
-                    isActive: location.pathname.includes(UserRoutes.Index),
+                    href: RealtorRoutes.Index,
+                    isActive: location.pathname.includes(RealtorRoutes.Index),
                     label: t("Users"),
                 },
             ];

@@ -7,8 +7,11 @@ import useForm from "../../../../../core/hooks/useForm";
 import { useTranslation } from "react-i18next";
 import PasswordInput from "../../../../Design/Form/PasswordInput";
 import OfficeSelect from "../../Offices/Select/OfficeSelect";
+import { useUser } from "../../../Auth/AuthProvider";
+import useFetch from "../../../../../core/hooks/useFetch";
 
 // dynamic schema
+
 const getSchema = (isUpdate) => {
   return yup.object().shape({
     name: yup.string().required(),
@@ -30,7 +33,13 @@ const transformValues = (values) => {
   return values;
 };
 
+
 const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
+    const {
+        data: user,
+        // refresh,
+    } = useFetch(`/users/${useUser().id}`);
+    
   const { t } = useTranslation();
   const isUpdate = !!initialData.id;
   const { values, errors, handleChange, handleSubmit } = useForm(
@@ -47,21 +56,44 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
   );
 
   let form;
+  let roleSelect;
 
-  if(values.role ==="REALTOR"){
-      form = <FormGroup>
-                <OfficeSelect
-                    name="officeId"
-                    value={values.officeId}
-                    onChange={handleChange}
-                    error={errors.officeId}
-                />
-            </FormGroup>
+
+  if(user){
+    if(values.role ==="REALTOR"){
+        form = <FormGroup>
+                  <OfficeSelect
+                      name="officeId"
+                      value={values.officeId}
+                      onChange={handleChange}
+                      error={errors.officeId}
+                  />
+              </FormGroup>
+
+        roleSelect =<FormGroup>
+                        <select name="role" onChange={handleChange} value={values.role} error={errors.officeId}>
+                            <option value="USER">User</option>
+                            <option value="REALTOR">Makelaar</option>
+                            <option value="ADMIN">Admin</option>
+                        </select>
+                    </FormGroup>
+    }
+    else {
+        values.officeId = null;
+        form ='';
+    }
+
+    console.log(user);
+
+    if(user.role === "REALTOR"){
+        form='';
+        roleSelect = '';
+        values.role = "REALTOR";
+        values.officeId = user.office.id;
+    }
   }
-  else {
-      values.officeId = null;
-      form ='';
-  }
+
+
 
   const handleData = (values) => {
     onSubmit(transformValues(values));
@@ -113,13 +145,8 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
           <p className="text-muted">{t("users.edit.password_print")}</p>
         )}
       </FormGroup>
-      <FormGroup>
-          <select name="role" onChange={handleChange} value={values.role} error={errors.officeId}>
-              <option value="USER">User</option>
-              <option value="REALTOR">Makelaar</option>
-              <option value="ADMIN">Admin</option>
-          </select>
-      </FormGroup>
+
+        {roleSelect}
 
         {form}
 

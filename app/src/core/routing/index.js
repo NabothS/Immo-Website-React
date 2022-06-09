@@ -37,6 +37,13 @@ const UserRoutes = {
     Edit: "/users/:id/edit",
 };
 
+const RealtorRoutes = {
+    Index: "/realtor",
+    New: "/realtor/new",
+    Detail: "/realtor/:id",
+    Edit: "/realtor/:id/edit",
+};
+
 // replaces : values with values from object
 // e.g. route('/projects/:id', { id : 9 }) -> /projects/9
 export const route = (path, options = {}) => {
@@ -46,4 +53,4 @@ export const route = (path, options = {}) => {
     return path;
 };
 
-export { AuthRoutes, OfficeRoutes, UserRoutes, LogRoutes, BuildingRoutes, CategoryRoutes };
+export { AuthRoutes, OfficeRoutes, UserRoutes, LogRoutes, BuildingRoutes, CategoryRoutes , RealtorRoutes};

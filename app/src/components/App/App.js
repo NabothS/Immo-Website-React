@@ -6,6 +6,7 @@ import {
     UserRoutes,
     BuildingRoutes,
     CategoryRoutes,
+    RealtorRoutes,
 } from "../../core/routing";
 import AppLayout from "./AppLayout";
 import AuthProvider from "./Auth/AuthProvider";
@@ -163,19 +164,19 @@ const App = () => {
                         }>
                         {/* Users */}
                         <Route
-                            path={UserRoutes.Index}
+                            path={RealtorRoutes.Index}
                             element={<UsersLayout />}>
                             <Route index element={<UsersOverviewScreen />} />
                             <Route
-                                path={UserRoutes.New}
+                                path={RealtorRoutes.New}
                                 element={<UserAddScreen />}
                             />
                             <Route
-                                path={UserRoutes.Detail}
+                                path={RealtorRoutes.Detail}
                                 element={<UserDetailLayout />}>
                                 <Route index element={<UserDetailScreen />} />
                                 <Route
-                                    path={UserRoutes.Edit}
+                                    path={RealtorRoutes.Edit}
                                     element={<UserEditScreen />}
                                 />
                             </Route>
