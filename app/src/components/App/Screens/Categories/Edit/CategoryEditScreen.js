@@ -10,41 +10,41 @@ import Title from "../../../../Design/Typography/Title";
 import CategoryForm from "../../../Shared/Categories/Form/CategoryForm";
 
 const CategoryEditScreen = () => {
-    const { t } = useTranslation();
-    const { category, onOfficeUpdate } = useOutletContext();
-    const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { category, onOfficeUpdate } = useOutletContext();
+  const navigate = useNavigate();
 
-    useTitle(t("Edit"));
+  useTitle(t("Edit"));
 
-    const { isLoading, error, mutate } = useMutation();
+  const { isLoading, error, mutate } = useMutation();
 
-    const handleSubmit = (data) => {
-        mutate(`${process.env.REACT_APP_API_URL}/categories`, {
-            method: "POST",
-            data,
-            multipart: true,
-            onSuccess: () => {
-                onOfficeUpdate();
-                navigate(route(CategoryRoutes.Detail, { id: category.id }));
-            },
-        });
-    };
+  const handleSubmit = (data) => {
+    mutate(`${process.env.REACT_APP_API_URL}/categories`, {
+      method: "POST",
+      data,
+      multipart: true,
+      onSuccess: () => {
+        onOfficeUpdate();
+        navigate(route(CategoryRoutes.Detail, { id: category.id }));
+      },
+    });
+  };
 
-    return (
-        <>
-            <BackButton href={route(CategoryRoutes.Index, { id: category.id })} />
-            <PageHeader>
-                <Title>{t("Edit Category")}</Title>
-            </PageHeader>
-            {error && <Alert color="danger">{error}</Alert>}
-            <CategoryForm
-                label={t("Save")}
-                disabled={isLoading}
-                onSubmit={handleSubmit}
-                initialData={category}
-            />
-        </>
-    );
+  return (
+    <>
+      <BackButton href={route(CategoryRoutes.Index, { id: category.id })} />
+      <PageHeader>
+        <Title>{t("Edit Category")}</Title>
+      </PageHeader>
+      {error && <Alert color="danger">{error}</Alert>}
+      <CategoryForm
+        label={t("Save")}
+        disabled={isLoading}
+        onSubmit={handleSubmit}
+        initialData={category}
+      />
+    </>
+  );
 };
 
 export default CategoryEditScreen;

@@ -13,100 +13,102 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required(),
 });
 
 const defaultData = {
-    email: "",
-    password: "",
+  email: "",
+  password: "",
 };
 
 const RegisterScreen = () => {
-    const { t } = useTranslation();
-    const { login } = useAuthContext();
-    const { isLoading, error, mutate } = useMutation();
-    const  navigation  = useNavigate();
-    const { values, errors, handleChange, handleSubmit } = useForm(schema, {
-        ...defaultData,
+  const { t } = useTranslation();
+  const { login } = useAuthContext();
+  const { isLoading, error, mutate } = useMutation();
+  const navigation = useNavigate();
+  const { values, errors, handleChange, handleSubmit } = useForm(schema, {
+    ...defaultData,
+  });
+
+  const handleData = (values) => {
+    mutate(`${process.env.REACT_APP_API_URL}/dev/users`, {
+      method: "POST",
+      data: values,
+      onSuccess: (data) => {
+        login(data);
+      },
     });
+  };
 
-    const handleData = (values) => {
-        console.log(process.env.REACT_APP_API_URL);
-        mutate(`${process.env.REACT_APP_API_URL}/dev/users`, {
-            method: "POST",
-            data: values,
-            onSuccess: (data) => {
-                login(data);
-            },
-        });
-    };
+  const handleLogin = () => {
+    navigation("/login");
+  };
 
-    const handleLogin = () => {
-        navigation("/login");
-    }
+  return (
+    <Container>
+      <h1>{t("Register")}</h1>
+      <form onSubmit={handleSubmit(handleData)} noValidate={true}>
+        {error && <Alert color="danger">{error}</Alert>}
+        <FormGroup>
+          <Label htmlFor="name">{t("Name")}</Label>
+          <Input
+            name="name"
+            value={values.name}
+            error={errors.name}
+            disabled={isLoading}
+            onChange={handleChange}
+          />
+        </FormGroup>
 
-     return (
-        <Container>
-            <h1>{t("Register")}</h1>
-            <form onSubmit={handleSubmit(handleData)} noValidate={true}>
-                {error && <Alert color="danger">{error}</Alert>}
-                <FormGroup>
-                    <Label htmlFor="name">{t("Name")}</Label>
-                    <Input
-                        name="name"
-                        value={values.name}
-                        error={errors.name}
-                        disabled={isLoading}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
+        <FormGroup>
+          <Label htmlFor="surname">{t("Surname")}</Label>
+          <Input
+            name="surname"
+            value={values.surname}
+            error={errors.surname}
+            disabled={isLoading}
+            onChange={handleChange}
+          />
+        </FormGroup>
 
-                <FormGroup>
-                    <Label htmlFor="surname">{t("Surname")}</Label>
-                    <Input
-                        name="surname"
-                        value={values.surname}
-                        error={errors.surname}
-                        disabled={isLoading}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
+        <FormGroup>
+          <Label htmlFor="email">{t("Email")}</Label>
+          <Input
+            name="email"
+            value={values.email}
+            error={errors.email}
+            disabled={isLoading}
+            onChange={handleChange}
+          />
+        </FormGroup>
 
-                <FormGroup>
-                    <Label htmlFor="email">{t("Email")}</Label>
-                    <Input
-                        name="email"
-                        value={values.email}
-                        error={errors.email}
-                        disabled={isLoading}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
+        <FormGroup>
+          <Label htmlFor="password">{t("Password")}</Label>
+          <Input
+            name="password"
+            type="password"
+            value={values.password}
+            error={errors.password}
+            disabled={isLoading}
+            onChange={handleChange}
+          />
+        </FormGroup>
+        <Button type="submit" disabled={isLoading}>
+          {t("Register")}
+        </Button>
+      </form>
 
-                <FormGroup>
-                    <Label htmlFor="password">{t("Password")}</Label>
-                    <Input
-                        name="password"
-                        type="password"
-                        value={values.password}
-                        error={errors.password}
-                        disabled={isLoading}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
-                <Button type="submit" disabled={isLoading}>
-                    {t("Register")}
-                </Button>
-
-            </form>
-
-            <Button type="submit" color="tertiary" disabled={isLoading} onClick={handleLogin}>
-                {t("Login")}
-            </Button>
-
-        </Container>
-    );
+      <Button
+        type="submit"
+        color="tertiary"
+        disabled={isLoading}
+        onClick={handleLogin}
+      >
+        {t("Login")}
+      </Button>
+    </Container>
+  );
 };
 
 export default RegisterScreen;

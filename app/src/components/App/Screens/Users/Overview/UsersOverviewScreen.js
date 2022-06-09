@@ -16,80 +16,76 @@ import { useUser } from "../../../Auth/AuthProvider";
 import Label from "../../../../Design/Form/Label";
 
 const UsersOverviewScreen = () => {
-    const { t } = useTranslation();
-    const { isLoading, data: users, error } = useFetch("/users");
+  const { t } = useTranslation();
+  const { isLoading, data: users, error } = useFetch("/users");
 
-    const userInfo = useUser();
+  const userInfo = useUser();
 
-    useTitle(t("Users"));
+  useTitle(t("Users"));
 
-    if (isLoading) {
-        return <LoadingIndicator />;
+  if (isLoading) {
+    return <LoadingIndicator />;
+  }
+  if (error) {
+    return <Alert color="danger">{error}</Alert>;
+  }
+
+  let userNew;
+  let userDetail;
+  let link;
+
+  if (userInfo) {
+    if (userInfo.role === "ADMIN") {
+      userNew = UserRoutes.New;
+      userDetail = UserRoutes.Detail;
+    } else {
+      userNew = RealtorRoutes.New;
+      userDetail = RealtorRoutes.Detail;
     }
-    if (error) {
-        return <Alert color="danger">{error}</Alert>;
-    }
+  }
 
-    let userNew;
-    let userDetail;
-    let link;
-
-    if(userInfo){
-        if(userInfo.role === "ADMIN"){
-            userNew = UserRoutes.New;
-            userDetail = UserRoutes.Detail;
-            
+  return (
+    <>
+      <PageHeader>
+        <Title>{t("Users")}</Title>
+        <Button href={userNew}>{t("Add a new user")}</Button>
+      </PageHeader>
+      <Table
+        header={
+          <TableHeader>
+            <th>{t("ID")}</th>
+            <th>{t("Name")}</th>
+            <th>{t("Email")}</th>
+            <th>{t("Role")}</th>
+            <th>{t("Real Estate Office")}</th>
+          </TableHeader>
         }
-        else {
-            userNew = RealtorRoutes.New;
-            userDetail = RealtorRoutes.Detail;
-        }
-    }
+      >
+        {users.map((user) => (
+          <TableRow key={user.id}>
+            <td>{user.id}</td>
+            <td>
+              {userInfo.role === "ADMIN" && (
+                <Link
+                  to={route(userDetail, {
+                    id: user.id,
+                  })}
+                >
+                  {formatName(user)}
+                </Link>
+              )}
 
-    return (
-        <>
-            <PageHeader>
-                <Title>{t("Users")}</Title>
-                <Button href={userNew}>
-                    {t("Add a new user")}
-                </Button>
-            </PageHeader>
-            <Table
-                header={
-                    <TableHeader>
-                        <th>{t("ID")}</th>
-                        <th>{t("Name")}</th>
-                        <th>{t("Email")}</th>
-                        <th>{t("Role")}</th>
-                    </TableHeader>
-                }>
-                {users.map((user) => (
-                    <TableRow key={user.id}>
-                        <td>{user.id}</td>
-                        <td>
-                            {userInfo.role === "ADMIN" && (
-                                <Link
-                                    to={route(userDetail, {
-                                        id: user.id,
-                                    })}>
-                                    {formatName(user)}
-                                </Link>
-                            )}
-
-                            {userInfo.role === "REALTOR" && (
-                                <Label>
-                                    {formatName(user)}
-                                </Label>
-                            )}
-                            
-                        </td>
-                        <td>{user.email}</td>
-                        <td>{user.role}</td>
-                    </TableRow>
-                ))}
-            </Table>
-        </>
-    );
+              {userInfo.role === "REALTOR" && <Label>{formatName(user)}</Label>}
+            </td>
+            <td>{user.email}</td>
+            <td>{user.role}</td>
+            {!user.office && <td>{t("Not Affilated")}</td>}
+            {user.office && <td>{user.office.name}</td>}
+          </TableRow>
+        ))}
+      </Table>
+    </>
+  );
 };
 
 export default UsersOverviewScreen;

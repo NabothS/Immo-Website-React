@@ -10,39 +10,35 @@ import Title from "../../../../Design/Typography/Title";
 import UserForm from "../../../Shared/Users/Form/UserForm";
 
 const UserAddScreen = () => {
-    const { t } = useTranslation();
-    const navigate = useNavigate();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-    useTitle(t("Create User"));
+  useTitle(t("Create User"));
 
-    const { isLoading, error, mutate } = useMutation();
+  const { isLoading, error, mutate } = useMutation();
 
-    const handleSubmit = (data) => {
-        console.log(data);
-        mutate(`${process.env.REACT_APP_API_URL}/dev/users`, {
-            method: "POST",
-            data,
-            onSuccess: () => {
-                console.log('succes')
-                //navigate(UserRoutes.Index);
-            },
-        });
-    };
+  const handleSubmit = (data) => {
+    console.log(data);
+    mutate(`${process.env.REACT_APP_API_URL}/dev/users`, {
+      method: "POST",
+      data,
+      onSuccess: () => {
+        console.log("succes");
+        //navigate(UserRoutes.Index);
+      },
+    });
+  };
 
-    return (
-        <>
-            <BackButton href={route(UserRoutes.Index)} />
-            <PageHeader>
-                <Title>{t("Add e new user")}</Title>
-            </PageHeader>
-            {error && <Alert color="danger">{error}</Alert>}
-            <UserForm
-                label={t("Add")}
-                disabled={isLoading}
-                onSubmit={handleSubmit}
-            />
-        </>
-    );
+  return (
+    <>
+      <BackButton href={route(UserRoutes.Index)} />
+      <PageHeader>
+        <Title>{t("Add e new user")}</Title>
+      </PageHeader>
+      {error && <Alert color="danger">{error}</Alert>}
+      <UserForm label={t("Add")} disabled={isLoading} onSubmit={handleSubmit} />
+    </>
+  );
 };
 
 export default UserAddScreen;

@@ -49,7 +49,7 @@ export default class BuildingController {
             buildings = await this.buildingService.all();
         }
         else if(user.office === null){
-            buildings = []
+            buildings = await this.buildingService.all();
         }
         else{
             buildings = await this.buildingService.findByOfficeId( user.office.id );

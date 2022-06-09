@@ -4,29 +4,29 @@ import Alert from "../../../../Design/Alert";
 import LoadingIndicator from "../../../Shared/Generic/LoadingIndicator/LoadingIndicator";
 
 const UserDetailLayout = () => {
-    const { id } = useParams();
+  const { id } = useParams();
 
-    const {
-        isLoading,
-        error,
-        invalidate,
-        data: user,
-        // refresh,
-    } = useFetch(`/users/${id}`);
+  const {
+    isLoading,
+    error,
+    invalidate,
+    data: user,
+    // refresh,
+  } = useFetch(`/users/${id}`);
 
-    const handleUpdate = () => {
-        invalidate();
-    };
+  const handleUpdate = () => {
+    invalidate();
+  };
 
-    if (error) {
-        return <Alert color="danger">{error}</Alert>;
-    }
+  if (error) {
+    return <Alert color="danger">{error}</Alert>;
+  }
 
-    if (isLoading) {
-        return <LoadingIndicator />;
-    }
+  if (isLoading) {
+    return <LoadingIndicator />;
+  }
 
-    return <Outlet context={{ user, onUserUpdate: handleUpdate }} />;
+  return <Outlet context={{ user, onUserUpdate: handleUpdate }} />;
 };
 
 export default UserDetailLayout;

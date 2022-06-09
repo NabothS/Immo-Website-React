@@ -10,39 +10,39 @@ import Title from "../../../../Design/Typography/Title";
 import BuildingForm from "../../../Shared/Buildings/Form/BuildingForm";
 
 const BuildingAddScreen = () => {
-    const { t } = useTranslation();
-    const navigate = useNavigate();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-    const { isLoading, error, mutate } = useMutation();
+  const { isLoading, error, mutate } = useMutation();
 
-    useTitle(t("Add Buildings"));
+  useTitle(t("Add Buildings"));
 
-    const handleSubmit = (data) => {
-        console.log(data)
-        mutate(`${process.env.REACT_APP_API_URL}/buildings`, {
-            method: "POST",
-            data,
-            multipart: true,
-            onSuccess: () => {
-                navigate(BuildingRoutes.Index);
-            },
-        });
-    };
+  const handleSubmit = (data) => {
+    console.log(data);
+    mutate(`${process.env.REACT_APP_API_URL}/buildings`, {
+      method: "POST",
+      data,
+      multipart: true,
+      onSuccess: () => {
+        navigate(BuildingRoutes.Index);
+      },
+    });
+  };
 
-    return (
-        <>
-            <BackButton href={route(BuildingRoutes.Index)} />
-            <PageHeader>
-                <Title>{t("Register a Building")}</Title>
-            </PageHeader>
-            {error && <Alert color="danger">{error}</Alert>}
-            <BuildingForm
-                label={t("Create")}
-                disabled={isLoading}
-                onSubmit={handleSubmit}
-            />
-        </>
-    );
+  return (
+    <>
+      <BackButton href={route(BuildingRoutes.Index)} />
+      <PageHeader>
+        <Title>{t("Register a Building")}</Title>
+      </PageHeader>
+      {error && <Alert color="danger">{error}</Alert>}
+      <BuildingForm
+        label={t("Create")}
+        disabled={isLoading}
+        onSubmit={handleSubmit}
+      />
+    </>
+  );
 };
 
 export default BuildingAddScreen;

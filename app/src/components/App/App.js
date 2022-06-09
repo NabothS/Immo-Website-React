@@ -1,12 +1,12 @@
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import {
-    AuthRoutes,
-    OfficeRoutes,
-    LogRoutes,
-    UserRoutes,
-    BuildingRoutes,
-    CategoryRoutes,
-    RealtorRoutes,
+  AuthRoutes,
+  OfficeRoutes,
+  LogRoutes,
+  UserRoutes,
+  BuildingRoutes,
+  CategoryRoutes,
+  RealtorRoutes,
 } from "../../core/routing";
 import AppLayout from "./AppLayout";
 import AuthProvider from "./Auth/AuthProvider";
@@ -46,150 +46,109 @@ import CategoryDetailScreen from "./Screens/Categories/Detail/CategoryDetailScre
 import CategoryEditScreen from "./Screens/Categories/Edit/CategoryEditScreen";
 
 const App = () => {
-    return (
-        <AuthProvider>
-            <Routes>
-                <Route exact path="/register" element={<RegisterScreen />} />
-                <Route path={AuthRoutes.Index} element={<OnboardingLayout />}>
-                    <Route path={AuthRoutes.Login} element={<LoginScreen />} />
-                    <Route
-                        path="*"
-                        element={<Navigate to={AuthRoutes.Login} />}
-                    />
-                </Route>
-                <Route
-                    element={
-                        <AuthContainer>
-                            <AppLayout />
-                        </AuthContainer>
-                    }>
-                    {/* Clients */}
-                    <Route
-                        path={OfficeRoutes.Index}
-                        element={<OfficesLayout />}>
-                        <Route index element={<OfficesOverviewScreen />} />
-                        <Route
-                            path={OfficeRoutes.New}
-                            element={<OfficeAddScreen />}
-                        />
-                        <Route
-                            path={OfficeRoutes.Detail}
-                            element={<OfficeDetailLayout />}>
-                            <Route index element={<OfficeEditScreen />} />
-                            <Route
-                                path={OfficeRoutes.Edit}
-                                element={<OfficeEditScreen />}
-                            />
-                        </Route>
-                    </Route>
-                    {/* Projects */}
-                    <Route
-                        path={BuildingRoutes.Index}
-                        element={<BuildingsLayout />}>
-                        <Route index element={<BuildingsOverviewScreen />} />
-                        <Route
-                            path={BuildingRoutes.New}
-                            element={<BuildingAddScreen />}
-                        />
-                        <Route
-                            path={BuildingRoutes.Detail}
-                            element={<BuildingDetailLayout />}>
-                            <Route index element={<BuildingDetailScreen />} />
-                            <Route
-                                path={BuildingRoutes.Edit}
-                                element={<BuildingEditScreen />}
-                            />
-                        </Route>
-                    </Route>
-                    {/* Logs */}
-                    <Route path={LogRoutes.Index} element={<LogsLayout />}>
-                        <Route index element={<LogsOverviewScreen />} />
-                        <Route
-                            path={LogRoutes.New}
-                            element={<LogAddScreen />}
-                        />
-                    </Route>
-                    {/* Admin */}
-                    <Route
-                        element={
-                            <RoleContainer roles={[UserRoles.Admin]}>
-                                <Outlet />
-                            </RoleContainer>
-                        }>
-                        {/* Users */}
-                        <Route
-                            path={UserRoutes.Index}
-                            element={<UsersLayout />}>
-                            <Route index element={<UsersOverviewScreen />} />
-                            <Route
-                                path={UserRoutes.New}
-                                element={<UserAddScreen />}
-                            />
-                            <Route
-                                path={UserRoutes.Detail}
-                                element={<UserDetailLayout />}>
-                                <Route index element={<UserDetailScreen />} />
-                                <Route
-                                    path={UserRoutes.Edit}
-                                    element={<UserEditScreen />}
-                                />
-                            </Route>
-                        </Route>
+  return (
+    <AuthProvider>
+      <Routes>
+        <Route exact path="/register" element={<RegisterScreen />} />
+        <Route path={AuthRoutes.Index} element={<OnboardingLayout />}>
+          <Route path={AuthRoutes.Login} element={<LoginScreen />} />
+          <Route path="*" element={<Navigate to={AuthRoutes.Login} />} />
+        </Route>
+        <Route
+          element={
+            <AuthContainer>
+              <AppLayout />
+            </AuthContainer>
+          }
+        >
+          {/* Clients */}
+          <Route path={OfficeRoutes.Index} element={<OfficesLayout />}>
+            <Route index element={<OfficesOverviewScreen />} />
+            <Route path={OfficeRoutes.New} element={<OfficeAddScreen />} />
+            <Route path={OfficeRoutes.Detail} element={<OfficeDetailLayout />}>
+              <Route index element={<OfficeEditScreen />} />
+              <Route path={OfficeRoutes.Edit} element={<OfficeEditScreen />} />
+            </Route>
+          </Route>
+          {/* Projects */}
+          <Route path={BuildingRoutes.Index} element={<BuildingsLayout />}>
+            <Route index element={<BuildingsOverviewScreen />} />
+            <Route path={BuildingRoutes.New} element={<BuildingAddScreen />} />
+            <Route
+              path={BuildingRoutes.Detail}
+              element={<BuildingDetailLayout />}
+            >
+              <Route index element={<BuildingDetailScreen />} />
+              <Route
+                path={BuildingRoutes.Edit}
+                element={<BuildingEditScreen />}
+              />
+            </Route>
+          </Route>
+          {/* Logs */}
+          <Route path={LogRoutes.Index} element={<LogsLayout />}>
+            <Route index element={<LogsOverviewScreen />} />
+            <Route path={LogRoutes.New} element={<LogAddScreen />} />
+          </Route>
+          {/* Admin */}
+          <Route
+            element={
+              <RoleContainer roles={[UserRoles.Admin]}>
+                <Outlet />
+              </RoleContainer>
+            }
+          >
+            {/* Users */}
+            <Route path={UserRoutes.Index} element={<UsersLayout />}>
+              <Route index element={<UsersOverviewScreen />} />
+              <Route path={UserRoutes.New} element={<UserAddScreen />} />
+              <Route path={UserRoutes.Detail} element={<UserDetailLayout />}>
+                <Route index element={<UserDetailScreen />} />
+                <Route path={UserRoutes.Edit} element={<UserEditScreen />} />
+              </Route>
+            </Route>
 
-                        <Route
-                            path={CategoryRoutes.Index}
-                            element={<CategoriesLayout />}>
-                            <Route index element={<CategoriesOverviewScreen />} />
-                            <Route
-                                path={CategoryRoutes.New}
-                                element={<CategoryAddScreen />}
-                            />
-                            <Route
-                                path={CategoryRoutes.Detail}
-                                element={<CategoryDetailLayout />}>
-                                <Route index element={<CategoryDetailScreen />} />
-                                <Route
-                                    path={CategoryRoutes.Edit}
-                                    element={<CategoryEditScreen />}
-                                />
-                            </Route>
-                        </Route>
-                    </Route>
-                    {/* Realtor */}
-                    <Route
-                        element={
-                            <RoleContainer roles={[UserRoles.Realtor]}>
-                                <Outlet />
-                            </RoleContainer>
-                        }>
-                        {/* Users */}
-                        <Route
-                            path={RealtorRoutes.Index}
-                            element={<UsersLayout />}>
-                            <Route index element={<UsersOverviewScreen />} />
-                            <Route
-                                path={RealtorRoutes.New}
-                                element={<UserAddScreen />}
-                            />
-                            <Route
-                                path={RealtorRoutes.Detail}
-                                element={<UserDetailLayout />}>
-                                <Route index element={<UserDetailScreen />} />
-                                <Route
-                                    path={RealtorRoutes.Edit}
-                                    element={<UserEditScreen />}
-                                />
-                            </Route>
-                        </Route>
-                    </Route>
-                    <Route
-                        path="*"
-                        element={<Navigate to={BuildingRoutes.Index} />}
-                    />
-                </Route>
-            </Routes>
-        </AuthProvider>
-    );
+            <Route path={CategoryRoutes.Index} element={<CategoriesLayout />}>
+              <Route index element={<CategoriesOverviewScreen />} />
+              <Route
+                path={CategoryRoutes.New}
+                element={<CategoryAddScreen />}
+              />
+              <Route
+                path={CategoryRoutes.Detail}
+                element={<CategoryDetailLayout />}
+              >
+                <Route index element={<CategoryDetailScreen />} />
+                <Route
+                  path={CategoryRoutes.Edit}
+                  element={<CategoryEditScreen />}
+                />
+              </Route>
+            </Route>
+          </Route>
+          {/* Realtor */}
+          <Route
+            element={
+              <RoleContainer roles={[UserRoles.Realtor]}>
+                <Outlet />
+              </RoleContainer>
+            }
+          >
+            {/* Users */}
+            <Route path={RealtorRoutes.Index} element={<UsersLayout />}>
+              <Route index element={<UsersOverviewScreen />} />
+              <Route path={RealtorRoutes.New} element={<UserAddScreen />} />
+              <Route path={RealtorRoutes.Detail} element={<UserDetailLayout />}>
+                <Route index element={<UserDetailScreen />} />
+                <Route path={RealtorRoutes.Edit} element={<UserEditScreen />} />
+              </Route>
+            </Route>
+          </Route>
+          <Route path="*" element={<Navigate to={BuildingRoutes.Index} />} />
+        </Route>
+      </Routes>
+    </AuthProvider>
+  );
 };
 
 export default App;

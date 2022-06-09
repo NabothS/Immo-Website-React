@@ -4,29 +4,29 @@ import Alert from "../../../../Design/Alert";
 import LoadingIndicator from "../../../Shared/Generic/LoadingIndicator/LoadingIndicator";
 
 const BuildingDetailLayout = () => {
-    const { id } = useParams();
+  const { id } = useParams();
 
-    const {
-        isLoading,
-        error,
-        invalidate,
-        data: building,
-        // refresh,
-    } = useFetch(`/buildings/${id}`);
+  const {
+    isLoading,
+    error,
+    invalidate,
+    data: building,
+    // refresh,
+  } = useFetch(`/buildings/${id}`);
 
-    const handleUpdate = () => {
-        invalidate();
-    };
+  const handleUpdate = () => {
+    invalidate();
+  };
 
-    if (error) {
-        return <Alert color="danger">{error}</Alert>;
-    }
+  if (error) {
+    return <Alert color="danger">{error}</Alert>;
+  }
 
-    if (isLoading) {
-        return <LoadingIndicator />;
-    }
+  if (isLoading) {
+    return <LoadingIndicator />;
+  }
 
-    return <Outlet context={{ building, onBuildingUpdate: handleUpdate }} />;
+  return <Outlet context={{ building, onBuildingUpdate: handleUpdate }} />;
 };
 
 export default BuildingDetailLayout;

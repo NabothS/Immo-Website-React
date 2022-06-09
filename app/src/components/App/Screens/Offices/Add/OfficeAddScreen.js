@@ -10,38 +10,38 @@ import Title from "../../../../Design/Typography/Title";
 import OfficeForm from "../../../Shared/Offices/Form/OfficeForm";
 
 const OfficeAddScreen = () => {
-    const { t } = useTranslation();
-    const navigate = useNavigate();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-    useTitle(t("Create"));
+  useTitle(t("Create"));
 
-    const { isLoading, error, mutate } = useMutation();
+  const { isLoading, error, mutate } = useMutation();
 
-    const handleSubmit = (data) => {
-        mutate(`${process.env.REACT_APP_API_URL}/offices`, {
-            method: "POST",
-            data,
-            multipart: true,
-            onSuccess: () => {
-                navigate(OfficeRoutes.Index);
-            },
-        });
-    };
+  const handleSubmit = (data) => {
+    mutate(`${process.env.REACT_APP_API_URL}/offices`, {
+      method: "POST",
+      data,
+      multipart: true,
+      onSuccess: () => {
+        navigate(OfficeRoutes.Index);
+      },
+    });
+  };
 
-    return (
-        <>
-            <BackButton href={route(OfficeRoutes.Index)} />
-            <PageHeader>
-                <Title>{t("Create Office")}</Title>
-            </PageHeader>
-            {error && <Alert color="danger">{error}</Alert>}
-            <OfficeForm
-                label={t("Create")}
-                disabled={isLoading}
-                onSubmit={handleSubmit}
-            />
-        </>
-    );
+  return (
+    <>
+      <BackButton href={route(OfficeRoutes.Index)} />
+      <PageHeader>
+        <Title>{t("Create Office")}</Title>
+      </PageHeader>
+      {error && <Alert color="danger">{error}</Alert>}
+      <OfficeForm
+        label={t("Create")}
+        disabled={isLoading}
+        onSubmit={handleSubmit}
+      />
+    </>
+  );
 };
 
 export default OfficeAddScreen;

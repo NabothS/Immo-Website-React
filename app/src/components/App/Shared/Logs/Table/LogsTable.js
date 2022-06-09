@@ -15,90 +15,90 @@ import { DATE_API_FORMAT } from "../../../../../core/modules/logs/constants";
 import { formatMinutesToString } from "../../../../../core/modules/logs/utils";
 
 const defaultOptions = {
-    showUser: true,
-    showProject: true,
+  showUser: true,
+  showProject: true,
 };
 
 const LogsTable = ({ logs, options = {}, onRefresh }) => {
-    const [currentLog, setCurrentLog] = useState();
-    const { t } = useTranslation();
+  const [currentLog, setCurrentLog] = useState();
+  const { t } = useTranslation();
 
-    const handleDelete = () => {
-        onRefresh();
-    };
+  const handleDelete = () => {
+    onRefresh();
+  };
 
-    const handleEditClick = (log) => {
-        setCurrentLog(log);
-    };
+  const handleEditClick = (log) => {
+    setCurrentLog(log);
+  };
 
-    const handleUpdate = () => {
-        setCurrentLog(null);
-        onRefresh();
-    };
+  const handleUpdate = () => {
+    setCurrentLog(null);
+    onRefresh();
+  };
 
-    options = { ...defaultOptions, ...options };
+  options = { ...defaultOptions, ...options };
 
-    return (
-        <>
-            <Table
-                header={
-                    <TableHeader>
-                        <th>{t("fields.date")}</th>
-                        <th>{t("fields.time")}</th>
-                        <th>{t("fields.description")}</th>
-                        {options.showProject && <th>{t("fields.project")}</th>}
-                        {options.showUser && <th>{t("fields.user")}</th>}
-                        <th></th>
-                    </TableHeader>
-                }>
-                {logs.map((log) => (
-                    <TableRow key={log.id}>
-                        <td>
-                            {format(
-                                parse(log.date, DATE_API_FORMAT, new Date()),
-                                "dd/MM/yy"
-                            )}
-                        </td>
-                        <td>{formatMinutesToString(log.time)}</td>
-                        <td>{log.description}</td>
-                        {options.showProject && (
-                            <td>
-                                <Link
-                                    to={route(BuildingRoutes.Detail, {
-                                        //id: log.building.id,
-                                    })}>
-                                    {/* {log.project.name} */}
-                                </Link>
-                            </td>
-                        )}
-                        {options.showUser && <td>{formatName(log.user)}</td>}
-                        <td className="d-flex">
-                            <Button
-                                size="sm"
-                                onClick={() => handleEditClick(log)}
-                                color="secondary">
-                                <BiPencil />
-                            </Button>
-                            <DeleteButton
-                                size="sm"
-                                id={log.id}
-                                scope="logs"
-                                onSuccess={handleDelete}
-                            />
-                        </td>
-                    </TableRow>
-                ))}
-            </Table>
-            {currentLog && (
-                <CreateEditLogDialog
-                    onDismiss={() => setCurrentLog(null)}
-                    onSuccess={() => handleUpdate()}
-                    log={currentLog}
-                    options={options}
-                />
+  return (
+    <>
+      <Table
+        header={
+          <TableHeader>
+            <th>{t("fields.date")}</th>
+            <th>{t("fields.time")}</th>
+            <th>{t("fields.description")}</th>
+            {options.showProject && <th>{t("fields.project")}</th>}
+            {options.showUser && <th>{t("fields.user")}</th>}
+            <th></th>
+          </TableHeader>
+        }
+      >
+        {logs.map((log) => (
+          <TableRow key={log.id}>
+            <td>
+              {format(parse(log.date, DATE_API_FORMAT, new Date()), "dd/MM/yy")}
+            </td>
+            <td>{formatMinutesToString(log.time)}</td>
+            <td>{log.description}</td>
+            {options.showProject && (
+              <td>
+                <Link
+                  to={route(BuildingRoutes.Detail, {
+                    //id: log.building.id,
+                  })}
+                >
+                  {/* {log.project.name} */}
+                </Link>
+              </td>
             )}
-        </>
-    );
+            {options.showUser && <td>{formatName(log.user)}</td>}
+            <td className="d-flex">
+              <Button
+                size="sm"
+                onClick={() => handleEditClick(log)}
+                color="secondary"
+              >
+                <BiPencil />
+              </Button>
+              <DeleteButton
+                size="sm"
+                id={log.id}
+                scope="logs"
+                onSuccess={handleDelete}
+              />
+            </td>
+          </TableRow>
+        ))}
+      </Table>
+      {currentLog && (
+        <CreateEditLogDialog
+          onDismiss={() => setCurrentLog(null)}
+          onSuccess={() => handleUpdate()}
+          log={currentLog}
+          options={options}
+        />
+      )}
+    </>
+  );
 };
 
 export default LogsTable;

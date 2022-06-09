@@ -10,38 +10,38 @@ import Title from "../../../../Design/Typography/Title";
 import CategoryForm from "../../../Shared/Categories/Form/CategoryForm";
 
 const CategoryAddScreen = () => {
-    const { t } = useTranslation();
-    const navigate = useNavigate();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-    useTitle(t("Create"));
+  useTitle(t("Create"));
 
-    const { isLoading, error, mutate } = useMutation();
+  const { isLoading, error, mutate } = useMutation();
 
-    const handleSubmit = (data) => {
-        mutate(`${process.env.REACT_APP_API_URL}/categories`, {
-            method: "POST",
-            data,
-            multipart: true,
-            onSuccess: () => {
-                navigate(CategoryRoutes.Index);
-            },
-        });
-    };
+  const handleSubmit = (data) => {
+    mutate(`${process.env.REACT_APP_API_URL}/categories`, {
+      method: "POST",
+      data,
+      multipart: true,
+      onSuccess: () => {
+        navigate(CategoryRoutes.Index);
+      },
+    });
+  };
 
-    return (
-        <>
-            <BackButton href={route(CategoryRoutes.Index)} />
-            <PageHeader>
-                <Title>{t("Add Category")}</Title>
-            </PageHeader>
-            {error && <Alert color="danger">{error}</Alert>}
-            <CategoryForm
-                label={t("Create")}
-                disabled={isLoading}
-                onSubmit={handleSubmit}
-            />
-        </>
-    );
+  return (
+    <>
+      <BackButton href={route(CategoryRoutes.Index)} />
+      <PageHeader>
+        <Title>{t("Add Category")}</Title>
+      </PageHeader>
+      {error && <Alert color="danger">{error}</Alert>}
+      <CategoryForm
+        label={t("Create")}
+        disabled={isLoading}
+        onSubmit={handleSubmit}
+      />
+    </>
+  );
 };
 
 export default CategoryAddScreen;

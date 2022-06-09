@@ -8,39 +8,38 @@ import { useTranslation } from "react-i18next";
 import FileInput from "../../../../Design/Form/FileInput";
 
 const schema = yup.object().shape({
-    name: yup.string().required(),
-
+  name: yup.string().required(),
 });
 
 const CategoryForm = ({ initialData = {}, disabled, onSubmit, label }) => {
-    const { t } = useTranslation();
-    const { values, errors, handleChange, handleSubmit } = useForm(schema, {
-        name: "",
-        ...initialData,
-    });
+  const { t } = useTranslation();
+  const { values, errors, handleChange, handleSubmit } = useForm(schema, {
+    name: "",
+    ...initialData,
+  });
 
-    const handleData = (values) => {
-        onSubmit(values);
-    };
+  const handleData = (values) => {
+    onSubmit(values);
+  };
 
-    return (
-        <form onSubmit={handleSubmit(handleData)} noValidate={true}>
-            <FormGroup>
-                <Label htmlFor="name">{t("Name")}</Label>
-                <Input
-                    name="name"
-                    value={values.name}
-                    disabled={disabled}
-                    onChange={handleChange}
-                    error={errors.name}
-                />
-            </FormGroup>
+  return (
+    <form onSubmit={handleSubmit(handleData)} noValidate={true}>
+      <FormGroup>
+        <Label htmlFor="name">{t("Name")}</Label>
+        <Input
+          name="name"
+          value={values.name}
+          disabled={disabled}
+          onChange={handleChange}
+          error={errors.name}
+        />
+      </FormGroup>
 
-            <Button type="submit" disabled={disabled}>
-                {label}
-            </Button>
-        </form>
-    );
+      <Button type="submit" disabled={disabled}>
+        {label}
+      </Button>
+    </form>
+  );
 };
 
 export default CategoryForm;

@@ -1,7 +1,8 @@
-.divDetail{
-    display: flex;
-    padding: 20px;
+.divDetail {
+  display: flex;
+  padding: 20px;
 }
-.divDetail img{
-    margin-bottom: 30px;
+.divDetail img {
+  margin-bottom: 30px;
+  margin-right: 20px;
 }

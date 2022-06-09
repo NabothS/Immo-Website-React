@@ -17,65 +17,65 @@ import { getImagePath } from "../../../../../core/helpers/api";
 import { useUser } from "../../../Auth/AuthProvider";
 
 const CategoriesOverviewScreen = () => {
-    const { t } = useTranslation();
-    const {
-        isLoading,
-        data: categories,
-        error,
-        invalidate,
-    } = useFetch("/categories");
+  const { t } = useTranslation();
+  const {
+    isLoading,
+    data: categories,
+    error,
+    invalidate,
+  } = useFetch("/categories");
 
-    useTitle(t("Categories"));
+  useTitle(t("Categories"));
 
-    const handleCategoryDelete = () => {
-        invalidate();
-    };
+  const handleCategoryDelete = () => {
+    invalidate();
+  };
 
-    if (isLoading) {
-        return <LoadingIndicator />;
-    }
-    if (error) {
-        return <Alert color="danger">{error}</Alert>;
-    }
+  if (isLoading) {
+    return <LoadingIndicator />;
+  }
+  if (error) {
+    return <Alert color="danger">{error}</Alert>;
+  }
 
-    return (
-        <>
-            <PageHeader>
-                <Title>{t("Categories")}</Title>
+  return (
+    <>
+      <PageHeader>
+        <Title>{t("Categories")}</Title>
 
-                <Button href={CategoryRoutes.New}>
-                    {t("Create")}
-                </Button>
-            </PageHeader>
-            <Table
-                header={
-                    <TableHeader>
-                        <th>{t("Category")}</th>
-                    </TableHeader>
-                }>
-                {categories.map((category) => (
-                    <TableRow key={category.id}>
-                        <td>
-                            <Link
-                                to={route(CategoryRoutes.Detail, {
-                                    id: category.id,
-                                })}>
-                                {category.name}
-                            </Link>
-                        </td>
-                        <td>
-                            <DeleteButton
-                                size="sm"
-                                id={category.id}
-                                scope="offices"
-                                onSuccess={handleCategoryDelete}
-                            />
-                        </td>
-                    </TableRow>
-                ))}
-            </Table>
-        </>
-    );
+        <Button href={CategoryRoutes.New}>{t("Create")}</Button>
+      </PageHeader>
+      <Table
+        header={
+          <TableHeader>
+            <th>{t("Category")}</th>
+          </TableHeader>
+        }
+      >
+        {categories.map((category) => (
+          <TableRow key={category.id}>
+            <td>
+              <Link
+                to={route(CategoryRoutes.Detail, {
+                  id: category.id,
+                })}
+              >
+                {category.name}
+              </Link>
+            </td>
+            <td>
+              <DeleteButton
+                size="sm"
+                id={category.id}
+                scope="offices"
+                onSuccess={handleCategoryDelete}
+              />
+            </td>
+          </TableRow>
+        ))}
+      </Table>
+    </>
+  );
 };
 
 export default CategoriesOverviewScreen;

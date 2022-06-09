@@ -19,9 +19,8 @@ const getSchema = (isUpdate) => {
     email: yup.string().email().required(),
     password: isUpdate ? yup.string() : yup.string().required(),
     role: yup.string(),
-    officeId: yup.number().nullable()
+    officeId: yup.number().nullable(),
   });
-  
 };
 
 const transformValues = (values) => {
@@ -33,13 +32,12 @@ const transformValues = (values) => {
   return values;
 };
 
-
 const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
-    const {
-        data: user,
-        // refresh,
-    } = useFetch(`/users/${useUser().id}`);
-    
+  const {
+    data: user,
+    // refresh,
+  } = useFetch(`/users/${useUser().id}`);
+
   const { t } = useTranslation();
   const isUpdate = !!initialData.id;
   const { values, errors, handleChange, handleSubmit } = useForm(
@@ -58,47 +56,51 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
   let form;
   let roleSelect;
 
+  if (user) {
+    if (values.role === "REALTOR") {
+      form = (
+        <FormGroup>
+          <OfficeSelect
+            name="officeId"
+            value={values.officeId}
+            onChange={handleChange}
+            error={errors.officeId}
+          />
+        </FormGroup>
+      );
 
-  if(user){
-    if(values.role ==="REALTOR"){
-        form = <FormGroup>
-                  <OfficeSelect
-                      name="officeId"
-                      value={values.officeId}
-                      onChange={handleChange}
-                      error={errors.officeId}
-                  />
-              </FormGroup>
-
-        roleSelect =<FormGroup>
-                        <select name="role" onChange={handleChange} value={values.role} error={errors.officeId}>
-                            <option value="USER">User</option>
-                            <option value="REALTOR">Makelaar</option>
-                            <option value="ADMIN">Admin</option>
-                        </select>
-                    </FormGroup>
-    }
-    else {
-        values.officeId = null;
-        form ='';
+      roleSelect = (
+        <FormGroup>
+          <select
+            name="role"
+            onChange={handleChange}
+            value={values.role}
+            error={errors.officeId}
+          >
+            <option value="USER">User</option>
+            <option value="REALTOR">Makelaar</option>
+            <option value="ADMIN">Admin</option>
+          </select>
+        </FormGroup>
+      );
+    } else {
+      values.officeId = null;
+      form = "";
     }
 
     console.log(user);
 
-    if(user.role === "REALTOR"){
-        form='';
-        roleSelect = '';
-        values.role = "REALTOR";
-        values.officeId = user.office.id;
+    if (user.role === "REALTOR") {
+      form = "";
+      roleSelect = "";
+      values.role = "REALTOR";
+      values.officeId = user.office.id;
     }
   }
-
-
 
   const handleData = (values) => {
     onSubmit(transformValues(values));
   };
-
 
   return (
     <form onSubmit={handleSubmit(handleData)} noValidate={true}>
@@ -146,9 +148,9 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
         )}
       </FormGroup>
 
-        {roleSelect}
+      {roleSelect}
 
-        {form}
+      {form}
 
       <Button type="submit" disabled={disabled}>
         {label}

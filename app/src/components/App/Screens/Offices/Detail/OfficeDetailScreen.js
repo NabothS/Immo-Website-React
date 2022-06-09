@@ -7,22 +7,20 @@ import PageHeader from "../../../../Design/PageHeader";
 import Title from "../../../../Design/Typography/Title";
 
 const OfficeDetailScreen = () => {
-    const { t } = useTranslation();
-    const { office } = useOutletContext();
+  const { t } = useTranslation();
+  const { office } = useOutletContext();
 
-    useTitle(office ? office.name : "");
+  useTitle(office ? office.name : "");
 
-    return (
-        <>
-            <BackButton href={route(OfficeRoutes.Index)} />
-            <PageHeader>
-                <Title>{office.name}</Title>
-            </PageHeader>
-            <Link to={route(OfficeRoutes.Edit, { id: office.id })}>
-                {t("Edit")}
-            </Link>
-        </>
-    );
+  return (
+    <>
+      <BackButton href={route(OfficeRoutes.Index)} />
+      <PageHeader>
+        <Title>{office.name}</Title>
+      </PageHeader>
+      <Link to={route(OfficeRoutes.Edit, { id: office.id })}>{t("Edit")}</Link>
+    </>
+  );
 };
 
 export default OfficeDetailScreen;

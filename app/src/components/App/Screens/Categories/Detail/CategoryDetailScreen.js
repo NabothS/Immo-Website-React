@@ -7,22 +7,22 @@ import PageHeader from "../../../../Design/PageHeader";
 import Title from "../../../../Design/Typography/Title";
 
 const CategoryDetailScreen = () => {
-    const { t } = useTranslation();
-    const { category } = useOutletContext();
+  const { t } = useTranslation();
+  const { category } = useOutletContext();
 
-    useTitle(category ? category.name : "");
+  useTitle(category ? category.name : "");
 
-    return (
-        <>
-            <BackButton href={route(CategoryRoutes.Index)} />
-            <PageHeader>
-                <Title>{category.name}</Title>
-            </PageHeader>
-            <Link to={route(CategoryRoutes.Edit, { id: category.id })}>
-                {t("Edit")}
-            </Link>
-        </>
-    );
+  return (
+    <>
+      <BackButton href={route(CategoryRoutes.Index)} />
+      <PageHeader>
+        <Title>{category.name}</Title>
+      </PageHeader>
+      <Link to={route(CategoryRoutes.Edit, { id: category.id })}>
+        {t("Edit")}
+      </Link>
+    </>
+  );
 };
 
 export default CategoryDetailScreen;
