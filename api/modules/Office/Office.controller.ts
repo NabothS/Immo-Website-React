@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
 import { UPLOAD_FOLDER } from "../../constants";
 import NotFoundError from "../../errors/NotFoundError";
+import UserService from "../User/User.service";
 import OfficeService from "./Office.service";
 import { OfficeBody } from "./Office.types";
 
@@ -20,14 +21,20 @@ const getAvatar = (req: Request) => {
 
 export default class OfficeController {
     private officeService: OfficeService;
+    private userService: UserService;
+
 
     constructor() {
         this.officeService = new OfficeService();
+        this.userService = new UserService();
+
     }
 
     all = async (req: Request, res: Response, next: NextFunction) => {
+
         const offices = await this.officeService.all();
         return res.json(offices);
+        
     };
 
     find = async (

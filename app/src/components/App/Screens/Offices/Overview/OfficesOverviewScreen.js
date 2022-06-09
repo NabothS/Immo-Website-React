@@ -1,6 +1,6 @@
 import useFetch from "../../../../../core/hooks/useFetch";
 import Alert from "../../../../Design/Alert";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { OfficeRoutes, route } from "../../../../../core/routing";
 import LoadingIndicator from "../../../Shared/Generic/LoadingIndicator/LoadingIndicator";
 import { useTranslation } from "react-i18next";
@@ -18,12 +18,19 @@ import { useUser } from "../../../Auth/AuthProvider";
 
 const OfficesOverviewScreen = () => {
     const { t } = useTranslation();
+    const  navigation  = useNavigate();
     const {
         isLoading,
         data: offices,
         error,
         invalidate,
     } = useFetch("/offices");
+
+    const {
+        data: user,
+        // refresh,
+    } = useFetch(`/users/${useUser().id}`);
+
 
     useTitle(t("Offices"));
 
@@ -38,7 +45,32 @@ const OfficesOverviewScreen = () => {
         return <Alert color="danger">{error}</Alert>;
     }
 
-    
+    let newOffices = [];
+
+    if(user){
+        if(user.office != null){
+            offices.forEach(item => {
+                console.log(item);
+                if(item.id === user.office.id){
+                    newOffices.push(item);
+                }
+            });
+        }
+        else {
+            newOffices = offices;
+        }
+    }
+
+    let deleteForm;
+
+    if(user){
+        if( user.role === "REALTOR"){
+                deleteForm = '';
+        }
+    }
+
+
+    console.log(newOffices);
 
     return (
         <>
@@ -58,7 +90,7 @@ const OfficesOverviewScreen = () => {
                         <th></th>
                     </TableHeader>
                 }>
-                {offices.map((office) => (
+                {newOffices.map((office) => (
                     <TableRow key={office.id}>
                         <td>
                             {!isVoid(office.avatar) && (
@@ -81,12 +113,14 @@ const OfficesOverviewScreen = () => {
                             {office.contactPhone} ({office.contactEmail})
                         </td>
                         <td>
-                            <DeleteButton
-                                size="sm"
-                                id={office.id}
-                                scope="offices"
-                                onSuccess={handleOfficeDelete}
-                            />
+                            {deleteForm !== '' && (
+                                    <DeleteButton
+                                    size="sm"
+                                    id={office.id}
+                                    scope="offices"
+                                    onSuccess={handleOfficeDelete}
+                                />
+                            )}
                         </td>
                     </TableRow>
                 ))}
