@@ -89,6 +89,8 @@ const registerRoutes = (app: Router) => {
     // public folder
     app.use("/public", express.static(path.resolve(__dirname, "../public")));
 
+    app.use("/", (req,res) => res.send("Wowzers"));
+
     // onboarding routes (login, ...)
     registerOnboardingRoutes(app);
 
