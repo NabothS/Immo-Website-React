@@ -33,7 +33,7 @@ const RegisterScreen = () => {
 
     const handleData = (values) => {
         console.log(process.env.REACT_APP_API_URL);
-        mutate(`${process.env.REACT_APP_API_URL}/dev/users`, {
+        mutate(`${process.env.REACT_APP_API_URL}dev/users`, {
             method: "POST",
             data: values,
             onSuccess: (data) => {
