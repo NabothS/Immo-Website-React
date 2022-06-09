@@ -2,6 +2,9 @@
     "name": "Immo App",
     "version": "1.0.0",
     "main": "index.js",
+    "engines": {
+        "node":"16.x"
+    },
     "license": "MIT",
     "dependencies": {
         "@types/express-fileupload": "^1.2.2",
