@@ -28,6 +28,7 @@ const registerOnboardingRoutes = (router: Router) => {
     const authController = new AuthController();
     router.post("/login", authLocal, useMethod(authController.login));
 
+    router.get("/", (req,res) => res.send("Wowzers"));
     // test route REMOVE after
     const userController = new UserController();
     if (process.env.ENV === "development") {
@@ -89,7 +90,6 @@ const registerRoutes = (app: Router) => {
     // public folder
     app.use("/public", express.static(path.resolve(__dirname, "../public")));
 
-    app.use("/", (req,res) => res.send("Wowzers"));
 
     // onboarding routes (login, ...)
     registerOnboardingRoutes(app);
