@@ -58,7 +58,7 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
 
   if (user) {
     if (values.role === "REALTOR") {
-      form = (
+      form = 
         <FormGroup>
           <OfficeSelect
             name="officeId"
@@ -67,9 +67,15 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
             error={errors.officeId}
           />
         </FormGroup>
-      );
+      ;
 
-      roleSelect = (
+    } else {
+      values.officeId = null;
+      form = "";
+    }
+
+    if(user.role === "ADMIN"){
+        roleSelect = 
         <FormGroup>
           <select
             name="role"
@@ -82,13 +88,9 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
             <option value="ADMIN">Admin</option>
           </select>
         </FormGroup>
-      );
-    } else {
-      values.officeId = null;
-      form = "";
+      ;
     }
 
-    console.log(user);
 
     if (user.role === "REALTOR") {
       form = "";
