@@ -58,28 +58,29 @@ const Header = () => {
                 },
             ];
         }
-    }
+    
 
-    // admin only routes
-    if (isAdmin(user)) {
-        items = [
-            ...items,
-            {
-                href: OfficeRoutes.Index,
-                isActive: location.pathname.includes(OfficeRoutes.Index),
-                label: t("Real Estate Offices"),
-            },
-            {
-                href: CategoryRoutes.Index,
-                isActive: location.pathname.includes(CategoryRoutes.Index),
-                label: t("Categories"),
-            },
-            {
-                href: UserRoutes.Index,
-                isActive: location.pathname.includes(UserRoutes.Index),
-                label: t("Users"),
-            },
-        ];
+        // admin only routes
+        if (isAdmin(user)) {
+            items = [
+                ...items,
+                {
+                    href: OfficeRoutes.Index,
+                    isActive: location.pathname.includes(OfficeRoutes.Index),
+                    label: t("Real Estate Offices"),
+                },
+                {
+                    href: CategoryRoutes.Index,
+                    isActive: location.pathname.includes(CategoryRoutes.Index),
+                    label: t("Categories"),
+                },
+                {
+                    href: UserRoutes.Index,
+                    isActive: location.pathname.includes(UserRoutes.Index),
+                    label: t("Users"),
+                },
+            ];
+        }
     }
 
     return <NavBar onLogout={logout} navItems={items} />;
