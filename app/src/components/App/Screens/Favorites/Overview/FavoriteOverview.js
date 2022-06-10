@@ -1,7 +1,7 @@
 import useFetch from "../../../../../core/hooks/useFetch";
 import Alert from "../../../../Design/Alert";
 import { Link, useNavigate } from "react-router-dom";
-import { BuildingRoutes, FavoriteRoutes, route } from "../../../../../core/routing";
+import { BuildingRoutes, route } from "../../../../../core/routing";
 import LoadingIndicator from "../../../Shared/Generic/LoadingIndicator/LoadingIndicator";
 import { useTranslation } from "react-i18next";
 import Table from "../../../../Design/Table/Table";
@@ -10,7 +10,6 @@ import TableRow from "../../../../Design/Table/TableRow";
 import Title from "../../../../Design/Typography/Title";
 import DeleteButton from "../../../Shared/Generic/Buttons/DeleteButton";
 import PageHeader from "../../../../Design/PageHeader";
-import Button from "../../../../Design/Buttons/Button";
 import useTitle from "../../../../../core/hooks/useTitle";
 import isVoid from "../../../../../core/helpers/isVoid";
 import { getImagePath } from "../../../../../core/helpers/api";

@@ -38,7 +38,6 @@ export default class UserService {
 
     create = async (body: UserBody) => {
         const user = await this.repository.save(this.repository.create(body));
-        console.log(user);
         return user;
     };
 

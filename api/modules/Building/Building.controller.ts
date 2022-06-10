@@ -5,10 +5,7 @@ import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import CategoryService from "../Category/Category.service";
 import OfficeService from "../Office/Office.service";
-import { OfficeBody } from "../Office/Office.types";
-import { UserRole } from "../User/User.constants";
 import UserService from "../User/User.service";
-import Building from "./Building.entity";
 import BuildingService from "./Building.service";
 import { BuildingBody } from "./Building.types";
 

@@ -12,9 +12,6 @@ import DeleteButton from "../../../Shared/Generic/Buttons/DeleteButton";
 import PageHeader from "../../../../Design/PageHeader";
 import Button from "../../../../Design/Buttons/Button";
 import useTitle from "../../../../../core/hooks/useTitle";
-import isVoid from "../../../../../core/helpers/isVoid";
-import { getImagePath } from "../../../../../core/helpers/api";
-import { useUser } from "../../../Auth/AuthProvider";
 
 const CategoriesOverviewScreen = () => {
   const { t } = useTranslation();

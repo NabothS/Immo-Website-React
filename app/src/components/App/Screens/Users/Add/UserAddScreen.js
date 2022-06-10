@@ -18,13 +18,11 @@ const UserAddScreen = () => {
   const { isLoading, error, mutate } = useMutation();
 
   const handleSubmit = (data) => {
-    console.log(data);
     mutate(`${process.env.REACT_APP_API_URL}/dev/users`, {
       method: "POST",
       data,
       onSuccess: () => {
-        console.log("succes");
-        //navigate(UserRoutes.Index);
+        navigate(UserRoutes.Index);
       },
     });
   };

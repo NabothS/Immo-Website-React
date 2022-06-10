@@ -1,5 +1,4 @@
-import bodyParser = require("body-parser");
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import OfficeService from "../Office/Office.service";
@@ -43,7 +42,6 @@ export default class UserController {
         if(body.officeId){
             body.office = await this.officeService.findOne( body.officeId );
         }
-        console.log(req.body);
         const user = await this.userService.create(req.body);
         return res.json(user);
     };

@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { UploadedFile } from "express-fileupload";
-import { UPLOAD_FOLDER } from "../../constants";
 import NotFoundError from "../../errors/NotFoundError";
 import CategoryService from "./Category.service";
 import { CategoryBody } from "./Category.types";

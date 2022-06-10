@@ -10,7 +10,7 @@ import { useAuthContext } from "../AuthProvider";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),

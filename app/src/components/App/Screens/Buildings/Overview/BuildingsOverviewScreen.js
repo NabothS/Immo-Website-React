@@ -3,7 +3,6 @@ import Alert from "../../../../Design/Alert";
 import { Link, useNavigate } from "react-router-dom";
 import {
   BuildingRoutes,
-  OfficeRoutes,
   route,
 } from "../../../../../core/routing";
 import LoadingIndicator from "../../../Shared/Generic/LoadingIndicator/LoadingIndicator";
@@ -49,8 +48,6 @@ const BuildingsOverviewScreen = () => {
           "userId" : userId,
           "buildingId" : buildingId
       }
-
-      console.log(data);
 
         mutate(`${process.env.REACT_APP_API_URL}/favorites`, {
             method: "POST",

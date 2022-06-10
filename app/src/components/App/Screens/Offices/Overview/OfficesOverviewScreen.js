@@ -44,7 +44,7 @@ const OfficesOverviewScreen = () => {
   if (user) {
     if (user.office != null) {
       offices.forEach((item) => {
-        console.log(item);
+
         if (item.id === user.office.id) {
           newOffices.push(item);
         }
@@ -62,8 +62,8 @@ const OfficesOverviewScreen = () => {
     }
   }
 
-  console.log(newOffices);
 
+  
   return (
     <>
       <PageHeader>

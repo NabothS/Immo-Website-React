@@ -34,7 +34,6 @@ export default class BuildingService {
     };
 
     create = async (body: BuildingBody) => {
-        console.log(body);
         const building = await this.repository.save(
             this.repository.create(body)
         );

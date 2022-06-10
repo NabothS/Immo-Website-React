@@ -2,7 +2,6 @@ import {
   BuildingRoutes,
   CategoryRoutes,
   FavoriteRoutes,
-  LogRoutes,
   OfficeRoutes,
   RealtorRoutes,
   UserRoutes,

@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { UploadedFile } from "express-fileupload";
-import { UPLOAD_FOLDER } from "../../constants";
 import NotFoundError from "../../errors/NotFoundError";
 import BuildingService from "../Building/Building.service";
 import UserService from "../User/User.service";

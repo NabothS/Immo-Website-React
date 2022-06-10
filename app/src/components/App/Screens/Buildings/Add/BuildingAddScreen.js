@@ -18,7 +18,6 @@ const BuildingAddScreen = () => {
   useTitle(t("Add Buildings"));
 
   const handleSubmit = (data) => {
-    console.log(data);
     mutate(`${process.env.REACT_APP_API_URL}/buildings`, {
       method: "POST",
       data,

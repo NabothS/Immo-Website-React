@@ -2,7 +2,6 @@ import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import {
   AuthRoutes,
   OfficeRoutes,
-  LogRoutes,
   UserRoutes,
   BuildingRoutes,
   CategoryRoutes,
@@ -24,9 +23,7 @@ import UserAddScreen from "./Screens/Users/Add/UserAddScreen";
 import UserDetailLayout from "./Screens/Users/Detail/UserDetailLayout";
 import UserDetailScreen from "./Screens/Users/Detail/UserDetailScreen";
 import UserEditScreen from "./Screens/Users/Edit/UserEditScreen";
-import LogsLayout from "./Screens/Logs/LogsLayout";
-import LogsOverviewScreen from "./Screens/Logs/Overview/LogsOverviewScreen";
-import LogAddScreen from "./Screens/Logs/Add/LogAddScreen";
+
 import RegisterScreen from "./Auth/Register/RegisterScreen";
 import OfficesLayout from "./Screens/Offices/OfficesLayout";
 import OfficesOverviewScreen from "./Screens/Offices/Overview/OfficesOverviewScreen";

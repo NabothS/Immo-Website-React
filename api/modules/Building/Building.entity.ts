@@ -8,7 +8,6 @@ import {
 import { BaseEntity } from "../BaseEntity";
 import { IsDefined } from "class-validator";
 import Log from "../Log/Log.entity";
-import LogService from "../Log/Log.service";
 import Office from "../Office/Office.entity";
 import Category from "../Category/Category.entity";
 import Favorite from "../Favorite/Favorite.entity";

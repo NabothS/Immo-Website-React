@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response, Router } from "express";
 import * as express from "express";
 import NotFoundError from "../errors/NotFoundError";
-import { authJwt, authLocal, withRole } from "../middleware/auth";
+import { authJwt, authLocal } from "../middleware/auth";
 import LogController from "../modules/Log/Log.controller";
 import AuthController from "../modules/User/Auth.controller";
-import { UserRole } from "../modules/User/User.constants";
 import UserController from "../modules/User/User.controller";
 import * as path from "path";
 import OfficeController from "../modules/Office/Office.controller";

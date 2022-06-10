@@ -60,11 +60,9 @@ const BuildingForm = ({ initialData = {}, disabled, onSubmit, label }) => {
   }
 
   const handleData = (values) => {
-    console.log(values);
     onSubmit(values);
   };
 
-  console.log(values);
 
   return (
     <form onSubmit={handleSubmit(handleData)} noValidate={true}>
