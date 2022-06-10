@@ -85,7 +85,7 @@ const App = () => {
               />
             </Route>
           </Route>
-          
+
           <Route path={FavoriteRoutes.Index} element={<FavoritesLayout />}>
             <Route index element={<FavoritesOverviewScreen />} />
           </Route>

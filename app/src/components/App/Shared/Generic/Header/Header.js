@@ -34,14 +34,14 @@ const Header = () => {
 
   if (user) {
     if (user.role == "USER") {
-        items = [
-            ...items, 
-            {
-              href: FavoriteRoutes.Index,
-              isActive: location.pathname.includes(FavoriteRoutes.Index),
-              label: t("Favorites"),
-            },
-        ];
+      items = [
+        ...items,
+        {
+          href: FavoriteRoutes.Index,
+          isActive: location.pathname.includes(FavoriteRoutes.Index),
+          label: t("Favorites"),
+        },
+      ];
     }
     if (user.role == "REALTOR") {
       items = [

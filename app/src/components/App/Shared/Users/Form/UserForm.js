@@ -59,7 +59,7 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
 
   if (user) {
     if (values.role === "REALTOR") {
-      form = 
+      form = (
         <FormGroup>
           <OfficeSelect
             name="officeId"
@@ -68,15 +68,14 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
             error={errors.officeId}
           />
         </FormGroup>
-      ;
-
+      );
     } else {
       values.officeId = null;
       form = "";
     }
 
-    if(user.role === "ADMIN"){
-        roleSelect = 
+    if (user.role === "ADMIN") {
+      roleSelect = (
         <FormGroup>
           <select
             name="role"
@@ -84,14 +83,13 @@ const UserForm = ({ initialData = {}, disabled, onSubmit, label }) => {
             value={values.role}
             error={errors.officeId}
           >
-            <option value={UserRoles.User} >User</option>
+            <option value={UserRoles.User}>User</option>
             <option value={UserRoles.Realtor}>Makelaar</option>
             <option value={UserRoles.Admin}>Admin</option>
           </select>
         </FormGroup>
-      ;
+      );
     }
-
 
     if (user.role === "REALTOR") {
       form = "";

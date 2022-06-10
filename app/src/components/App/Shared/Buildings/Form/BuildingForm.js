@@ -63,7 +63,6 @@ const BuildingForm = ({ initialData = {}, disabled, onSubmit, label }) => {
     onSubmit(values);
   };
 
-
   return (
     <form onSubmit={handleSubmit(handleData)} noValidate={true}>
       <FormGroup>

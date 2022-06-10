@@ -1,10 +1,7 @@
 import useFetch from "../../../../../core/hooks/useFetch";
 import Alert from "../../../../Design/Alert";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  BuildingRoutes,
-  route,
-} from "../../../../../core/routing";
+import { BuildingRoutes, route } from "../../../../../core/routing";
 import LoadingIndicator from "../../../Shared/Generic/LoadingIndicator/LoadingIndicator";
 import { useTranslation } from "react-i18next";
 import Table from "../../../../Design/Table/Table";
@@ -44,19 +41,19 @@ const BuildingsOverviewScreen = () => {
   };
 
   const handleFavorite = (userId, buildingId) => {
-      let data = {
-          "userId" : userId,
-          "buildingId" : buildingId
-      }
+    let data = {
+      userId: userId,
+      buildingId: buildingId,
+    };
 
-        mutate(`${process.env.REACT_APP_API_URL}/favorites`, {
-            method: "POST",
-            data,
-            onSuccess: () => {
-            navigate(BuildingRoutes.Index);
-            },
-        })
-  }
+    mutate(`${process.env.REACT_APP_API_URL}/favorites`, {
+      method: "POST",
+      data,
+      onSuccess: () => {
+        navigate(BuildingRoutes.Index);
+      },
+    });
+  };
 
   if (isLoading) {
     return <LoadingIndicator />;
@@ -70,7 +67,7 @@ const BuildingsOverviewScreen = () => {
       <PageHeader>
         <Title>{t("All Buildings")}</Title>
         {user.role !== "USER" && (
-            <Button href={BuildingRoutes.New}>{t("Add new building")}</Button>
+          <Button href={BuildingRoutes.New}>{t("Add new building")}</Button>
         )}
       </PageHeader>
       <Table
@@ -82,12 +79,8 @@ const BuildingsOverviewScreen = () => {
             <th>{t("Real Estate Office")}</th>
             <th>{t("Adress")}</th>
             <th>{t("Link")}</th>
-            {user.role !== "USER" && (
-                <th>{t("Delete")}</th>
-            )}
-            {user.role === "USER" && (
-                <th>{t("Favorite")}</th>
-            )}
+            {user.role !== "USER" && <th>{t("Delete")}</th>}
+            {user.role === "USER" && <th>{t("Favorite")}</th>}
           </TableHeader>
         }
       >
@@ -107,15 +100,16 @@ const BuildingsOverviewScreen = () => {
 
             <td>{Capitalize(building.buy_rent)}</td>
 
-            {building.office &&(
-                <td>{building.office.name}</td>
-            )}
-            {!building.office &&(
-                <td>{t("Nothing to see here")}</td>
-            )}
-            
+            {building.office && <td>{building.office.name}</td>}
+            {!building.office && <td>{t("Nothing to see here")}</td>}
 
-            <td>{Capitalize(building.street) + ' ' + building.number + ' ' +  building.city}</td>
+            <td>
+              {Capitalize(building.street) +
+                " " +
+                building.number +
+                " " +
+                building.city}
+            </td>
 
             {user.role !== "USER" && (
               <td>
@@ -139,11 +133,15 @@ const BuildingsOverviewScreen = () => {
             </td>
 
             {user.role === "USER" && (
-                <td>
-                    <Button onClick={()=>{handleFavorite(user.id, building.id)}}>
-                        Voeg toe aan <FaHeart />
-                    </Button>
-                </td>
+              <td>
+                <Button
+                  onClick={() => {
+                    handleFavorite(user.id, building.id);
+                  }}
+                >
+                  Voeg toe aan <FaHeart />
+                </Button>
+              </td>
             )}
           </TableRow>
         ))}

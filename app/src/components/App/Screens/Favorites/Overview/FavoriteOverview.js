@@ -18,7 +18,12 @@ import { useUser } from "../../../Auth/AuthProvider";
 const FavoritesOverviewScreen = () => {
   const { t } = useTranslation();
   const navigation = useNavigate();
-  const { isLoading, data: favorites, error, invalidate } = useFetch("/favorites");
+  const {
+    isLoading,
+    data: favorites,
+    error,
+    invalidate,
+  } = useFetch("/favorites");
 
   const {
     data: user,
@@ -29,11 +34,11 @@ const FavoritesOverviewScreen = () => {
 
   let newFavs = [];
 
-  if(user){
-    favorites.forEach(item => {
-        if(item.user.id === user.id ){
-            newFavs.push(item);
-        }
+  if (user) {
+    favorites.forEach((item) => {
+      if (item.user.id === user.id) {
+        newFavs.push(item);
+      }
     });
   }
 
@@ -65,7 +70,7 @@ const FavoritesOverviewScreen = () => {
         {newFavs.map((favorite) => (
           <TableRow key={favorite.id}>
             <td>
-                {!isVoid(favorite.building.avatar) && (
+              {!isVoid(favorite.building.avatar) && (
                 <img
                   style={{ width: "6rem", height: "3.5rem" }}
                   src={getImagePath(favorite.building.avatar)}
@@ -74,21 +79,21 @@ const FavoritesOverviewScreen = () => {
               )}
             </td>
             <td>
-                <Link
-                    to={route(BuildingRoutes.Detail, {
-                    id: favorite.building.id,
-                    })}
-                >
-                    {"Go to the house"}
-                </Link>
+              <Link
+                to={route(BuildingRoutes.Detail, {
+                  id: favorite.building.id,
+                })}
+              >
+                {"Go to the house"}
+              </Link>
             </td>
             <td>
-                <DeleteButton
-                  size="sm"
-                  id={favorite.id}
-                  scope="favorites"
-                  onSuccess={handleFavoriteDelete}
-                />
+              <DeleteButton
+                size="sm"
+                id={favorite.id}
+                scope="favorites"
+                onSuccess={handleFavoriteDelete}
+              />
             </td>
           </TableRow>
         ))}

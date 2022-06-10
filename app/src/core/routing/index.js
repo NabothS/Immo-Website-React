@@ -45,11 +45,11 @@ const RealtorRoutes = {
 };
 
 const FavoriteRoutes = {
-    Index: "/favorites",
-    New: "/favorites/new",
-    Detail: "/favorites/:id",
-    Edit: "/favorites/:id/edit",
-  };
+  Index: "/favorites",
+  New: "/favorites/new",
+  Detail: "/favorites/:id",
+  Edit: "/favorites/:id/edit",
+};
 
 // replaces : values with values from object
 // e.g. route('/projects/:id', { id : 9 }) -> /projects/9

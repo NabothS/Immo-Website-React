@@ -1,4 +1,4 @@
-const TableRow = ({ children , className}) => {
+const TableRow = ({ children, className }) => {
   return <tr className={className}>{children}</tr>;
 };
 
